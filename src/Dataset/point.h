@@ -7,10 +7,11 @@ typedef struct point {
     double z;
 } Point;
 
-
-Point * getPoints(int *n_points, int cube);
-double computeDistance(Point point1, Point point2);
+int n_points;
+double (*points)[3];
+void getPoints(int N, int cube);
+double computeDistance(double * point1, double * point2, int dim);
 Point computeCentroid(Point * points, int * cluster, int n_points, int k);
-int equal(Point point1, Point point2);
+int equal(double * point1, double * point2, int dim);
 
 #endif

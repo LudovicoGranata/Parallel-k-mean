@@ -1,5 +1,5 @@
 #include "visualization.h"
-#include "point.h"
+#include "../Dataset/point.h"
 #include<stdio.h>
 #include<GL/glut.h>
 #include<math.h>
@@ -9,7 +9,6 @@
  
 /* Global variables */
 char title[] = "3D Shapes";
-Point * visualization_points;
 int * visualization_cluster;
 int visualization_n_points;
 int visualization_K;
@@ -71,7 +70,7 @@ glPointSize(3.0f);
                 break;            
 
         }
-      glVertex3f( visualization_points[i].x, visualization_points[i].y,visualization_points[i].z);
+      glVertex3f( points[i][0], points[i][1], points[i][2]);
     }
     glEnd();
 
@@ -102,8 +101,7 @@ void reshape(GLsizei width, GLsizei height) {  // GLsizei for non-negative integ
 }
  
 /* Main function: GLUT runs as a console application starting at main() */
-void showResult(Point * points, int * cluster, int n_points, int K, int argc, char *argv[], int dataCube){
-    visualization_points = points;
+void showResult(int * cluster, int n_points, int K, int argc, char *argv[], int dataCube){
     visualization_cluster = cluster;
     visualization_n_points = n_points;
     visualization_K = K;
