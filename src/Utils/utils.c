@@ -1,4 +1,5 @@
 #include "utils.h"
+#include <stdlib.h>
 
 
 double getValue (double * bidimensional, int i, int j, int n_column){
