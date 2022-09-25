@@ -5,9 +5,10 @@
 #include "../Phases/lib.h"
 #include "omp.h"
 #include "rply.h"
+#include "../Utils/utils.h"
 
 
-double (*points) [3];
+double *points;
 int n_points;
 int index = 0;
 
@@ -16,7 +17,8 @@ static int vertex_xyz(p_ply_argument argument)
     int xyz;
     ply_get_argument_user_data(argument, NULL, &xyz);
     double point_coord = ply_get_argument_value(argument);
-    points[index][xyz] = point_coord;
+    setValue(points, index, xyz, 3, point_coord);
+    // points[index][xyz] = point_coord;
     if (xyz == 2) index++;
     return 1;
 }
@@ -26,7 +28,7 @@ void getPoints(int N, int cube)
     if (cube == 0)
     {
         n_points = N;
-        points = malloc(sizeof(double[n_points][3]));
+        points = malloc(sizeof(double) *n_points*3);
         if (points == NULL)
         {
             printf("problems with allocation of memory ");
@@ -34,7 +36,7 @@ void getPoints(int N, int cube)
         for (int i = 0; i < n_points; i++)
         {
             for (int j=0;j<3; j++){
-                points[i][j] = random_double(0,40);
+                setValue(points,i,j,3, random_double(0,40));
             }
         }
     }
@@ -46,7 +48,7 @@ void getPoints(int N, int cube)
         if (!ply_read_header(ply))
             return 1;
         nvertices = ply_set_read_cb(ply, "vertex", "x", NULL, NULL, 0);
-        points = malloc(sizeof(double[nvertices][3]));
+        points = malloc(sizeof(double) * nvertices * 3);
         ply_set_read_cb(ply, "vertex", "x", vertex_xyz, NULL, 0);
         ply_set_read_cb(ply, "vertex", "y", vertex_xyz, NULL, 1);
         ply_set_read_cb(ply, "vertex", "z", vertex_xyz, NULL, 2);
@@ -57,12 +59,13 @@ void getPoints(int N, int cube)
             n_points = N;
         else n_points = nvertices;
         printf("total number of points:%d\t number of points requested:%d\n", nvertices, n_points);
-        double (*points_reduced)[3] =  malloc(sizeof(double[n_points][3]));
+        double *points_reduced =  malloc(sizeof(double) * n_points*3);
         for (int i=0; i< n_points; i++){
-           int random_point = random_int(0,nvertices);
-            for (int j=0; j<3; j++){
-                points_reduced[i][j] = points[random_point][j];
-            }
+            setRow(points_reduced, i, 3, getRow(points,random_int(0,nvertices), 3));
+        //    int random_point = random_int(0,nvertices);
+        //     for (int j=0; j<3; j++){
+        //         points_reduced[i][j] = points[random_point][j];
+        //     }
         }
         points = points_reduced;
     }

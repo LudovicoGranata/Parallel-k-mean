@@ -8,7 +8,7 @@ typedef struct point {
 } Point;
 
 int n_points;
-double (*points)[3];
+double *points;
 void getPoints(int N, int cube);
 double computeDistance(double * point1, double * point2, int dim);
 Point computeCentroid(Point * points, int * cluster, int n_points, int k);

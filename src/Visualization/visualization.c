@@ -6,6 +6,7 @@
 #define pi 3.142857
 #include <stdio.h>
 #include <stdlib.h>
+#include "../Utils/utils.h"
  
 /* Global variables */
 char title[] = "3D Shapes";
@@ -70,7 +71,7 @@ glPointSize(3.0f);
                 break;            
 
         }
-      glVertex3f( points[i][0], points[i][1], points[i][2]);
+      glVertex3f( getValue(points, i,0,3) , getValue(points, i,1,3), getValue(points, i,2,3));
     }
     glEnd();
 

@@ -9,7 +9,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 // "${file}",
-                "main.c ", "./Dataset/*.c", "./Phases/*.c","./Visualization/*.c",
+                "main.c ", "./Dataset/*.c", "./Phases/*.c","./Visualization/*.c", "./Utils/*.c",
                 "-lm",
                 "-lglfw",
                 "-lGL", "-lX11",

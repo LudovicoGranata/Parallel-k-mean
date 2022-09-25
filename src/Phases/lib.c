@@ -15,14 +15,14 @@ double random_double (double min, double max){
     return min + (rand() / div);
 }
 
-int argmin(double * array, int length){
-    double min = array [0];
-    int min_index = 0;
-    for (int i=1; i<length; i++){
-        if (array[i]< min){
-            min = array[i];
-            min_index = i;
-        }
-    }
-    return min_index;
-}
+// int argmin(double * array, int length){
+//     double min = array [0];
+//     int min_index = 0;
+//     for (int i=1; i<length; i++){
+//         if (array[i]< min){
+//             min = array[i];
+//             min_index = i;
+//         }
+//     }
+//     return min_index;
+// }
