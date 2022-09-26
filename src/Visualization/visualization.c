@@ -117,6 +117,6 @@ void showResult(int * cluster, int n_points, int K, int argc, char *argv[], int 
    glutReshapeFunc(reshape);       // Register callback handler for window re-size event
    initGL();                       // Our own OpenGL initialization
    glutMainLoop();                 // Enter the infinite event-processing loop
-   return 0;
+   return ;
 }
 
